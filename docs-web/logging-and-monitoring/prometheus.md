@@ -27,22 +27,22 @@ The Ingress Controller exports the following metrics:
   * Exported by NGINX/NGINX Plus. Refer to the [NGINX Prometheus Exporter developer docs](https://github.com/nginxinc/nginx-prometheus-exporter#exported-metrics) to find more information about the exported metrics.
   * There is a Grafana dashboard for NGINX Plus metrics located in the root repo folder.
   * Calculated by the Ingress Controller:
-    * `controller_upstream_server_response_latency_ms_count`. Bucketed response times from when NGINX establishes a connection to an upstream server to when the last byte of the response body is received by NGINX. **Note**: The metric for the upstream isn't available until traffic is sent to the upstream. The metric isn't enabled by default. To enable the metric, set the `-enable-latency-metrics` command-line argument.
+    * `upstream_server_response_latency_ms_count`. Bucketed response times from when NGINX establishes a connection to an upstream server to when the last byte of the response body is received by NGINX. **Note**: The metric for the upstream isn't available until traffic is sent to the upstream. The metric isn't enabled by default. To enable the metric, set the `-enable-latency-metrics` command-line argument.
 * Ingress Controller metrics
-  * `controller_nginx_reloads_total`. Number of successful NGINX reloads. This includes the label `reason` with 2 possible values `endpoints` (the reason for the reload was an endpoints update) and `other` (the reload was caused by something other than an endpoint update like an ingress update).
-  * `controller_nginx_reload_errors_total`. Number of unsuccessful NGINX reloads.
-  * `controller_nginx_last_reload_status`. Status of the last NGINX reload, 0 meaning down and 1 up.
-  * `controller_nginx_last_reload_milliseconds`. Duration in milliseconds of the last NGINX reload.
-  * `controller_nginx_worker_processes_total`. Number of NGINX worker processes. This metric includes the constant label `generation` with two possible values `old` (the shutting down processes of the old generations) or `current` (the processes of the current generation).
-  * `controller_ingress_resources_total`. Number of handled Ingress resources. This metric includes the label type, that groups the Ingress resources by their type (regular, [minion or master](/nginx-ingress-controller/configuration/ingress-resources/cross-namespace-configuration)). **Note**: The metric doesn't count minions without a master.
-  * `controller_virtualserver_resources_total`. Number of handled VirtualServer resources.
-  * `controller_virtualserverroute_resources_total`. Number of handled VirtualServerRoute resources. **Note**: The metric counts only VirtualServerRoutes that have a reference from a VirtualServer.
+  * `nginx_reloads_total`. Number of successful NGINX reloads. This includes the label `reason` with 2 possible values `endpoints` (the reason for the reload was an endpoints update) and `other` (the reload was caused by something other than an endpoint update like an ingress update).
+  * `nginx_reload_errors_total`. Number of unsuccessful NGINX reloads.
+  * `nginx_last_reload_status`. Status of the last NGINX reload, 0 meaning down and 1 up.
+  * `nginx_last_reload_milliseconds`. Duration in milliseconds of the last NGINX reload.
+  * `nginx_worker_processes_total`. Number of NGINX worker processes. This metric includes the constant label `generation` with two possible values `old` (the shutting down processes of the old generations) or `current` (the processes of the current generation).
+  * `ingress_resources_total`. Number of handled Ingress resources. This metric includes the label type, that groups the Ingress resources by their type (regular, [minion or master](/nginx-ingress-controller/configuration/ingress-resources/cross-namespace-configuration)). **Note**: The metric doesn't count minions without a master.
+  * `virtualserver_resources_total`. Number of handled VirtualServer resources.
+  * `virtualserverroute_resources_total`. Number of handled VirtualServerRoute resources. **Note**: The metric counts only VirtualServerRoutes that have a reference from a VirtualServer.
 * Kubernetes Cluster metrics
-  * `controller_workqueue_depth` Current depth of workqueue.
-  * `controller_workqueue_queue_duration_second`. How long in seconds an item stays in workqueue before being requested.
-  * `controller_workqueue_work_duration_seconds`. How long in seconds processing an item from workqueue takes.
+  * `workqueue_depth` Current depth of workqueue.
+  * `workqueue_queue_duration_second`. How long in seconds an item stays in workqueue before being requested.
+  * `workqueue_work_duration_seconds`. How long in seconds processing an item from workqueue takes.
 
 
-**Note**: all metrics have the namespace nginx_ingress. For example, nginx_ingress_controller_nginx_reloads_total.
+**Note**: all metrics have the namespace `nginx_ingress_controller`. For example, `nginx_ingress_controller_nginx_reloads_total`.
 
 **Note**: all metrics include the label `class`, which is set to the class of the Ingress Controller. The class is configured via the `-ingress-class` command-line argument.
