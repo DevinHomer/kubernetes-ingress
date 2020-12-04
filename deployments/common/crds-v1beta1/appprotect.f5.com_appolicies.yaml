@@ -567,8 +567,6 @@ spec:
                           type: object
                         type: array
                       name:
-                        enum:
-                        - Default
                         type: string
                       signatureOverrides:
                         items:
